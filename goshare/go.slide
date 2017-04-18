@@ -1,0 +1,191 @@
+Go语言分享
+
+樊冰新
+fanbingxin.me@gmail.com
+https://github.com/icexin
+
+* 什么是Go?
+
+Go语言是Google于2009年推出的一门新的系统编程语言。
+
+特点:
+
+- 静态编译
+- 垃圾回收
+- 简洁的符号和语法
+- 平坦的类型系统
+- 基于CSP的并发模型。
+- 高效简单的工具链。
+- 丰富的标准库
+
+* Hello world
+
+.play hello.go
+
+* Hello world(2)
+
+.play http.go
+
+* 历史
+
+- 2007年开始设计
+- 2008年作为Goole的20%项目开始实现
+- 2009年作为开源项目面向大众
+- 前天(8月15日)刚刚发布了1.7版本
+
+* 为什么需要一个新的语言
+
+* 编写-编译-运行的链条花费太长时间
+
+.image compiling.png
+
+* 语言太唠叨
+
+  scoped_ptr<logStats::LogStats>
+      logStats(logStats::LogStats::NewLogStats(FLAGS_logStats, logStats::LogStats::kFIFO));
+
+* 手残的灾难
+
+.code py.py
+
+* 简化这门语言必是一门更大的成就 - Rob Pike
+
+* Go的思维方式
+
+- 最小心智负担原则
+- 最小特性
+- 最少惊异
+- 最少犯错机会
+
+* Go, Next Java? No, Next C!
+
+- 少就是指数级的多
+- 最少特性原则：如果一个功能不对解决任何问题有显著价值，那么就不提供
+- 显式表达：所写即所得的语言
+- 极度简化但完备的OOP
+- 功能内聚：例如，强大的组合能力
+- 最友善的 C 语言的支持
+
+
+* 以软件工程为目的的语言设计
+
+- 快速编译
+- 严格的依赖管理
+- 代码风格的强一致性
+- 偏向组合而不是继承
+
+
+* 几个优秀的设计
+
+- if for switch之类的语句不需要用括号了，但保留了大括号，方便定位语句块。
+- 可以使用 := 进行自动类型推导。再也不用写诸如 list<int>::iterator it = l.begin()之类的语法了。
+- 使用字母大小写设置可见性（letter case sets visibility）。省去了成员前面一堆的public和private，直接看名字就可以辨认。
+- 保留了指针操作，但去掉了指针算术，指针更安全了，同时留给了程序员使用值语义和引用语义的权利。
+- defer关键字。妈妈再也不用担心句柄没有关闭了。
+
+* 对OOP的支持
+
+- 返璞归真，没有继承，只有组合
+- 明确区分复用和抽象，复用使用组合，抽象使用
+- 所见即所得，明确的内存模型，没有vtable之类的东西
+- 鸭子类型，抽象更方便
+
+* OOP的例子
+
+.code struct.go
+
+* Go的并发
+
+基于 *协程(goroutine)* 和 *管道(channel)*
+
+- goroutine：轻量的"线程"
+- channel: 带类型的，协程安全的管道，类似unix里面的pipe
+
+.image funnelin.jpg
+
+
+* 并发的一个例子
+
+斐波那契数列产生器
+
+python 版本
+
+.code fib.py
+
+* python-fib
+
+.image fib-py.png _ 300
+
+* 斐波那契数列(go)
+
+.play fib.go /START OMIT/,/END OMIT/
+
+* go-fib
+
+.image fib-go.png _ 300
+
+* 并发(2)
+
+*C10K* 问题
+
+.play c10k.go /START OMIT/,/END OMIT/
+
+* Go在工程上的设计
+
+* 静态编译
+
+- 没有依赖地狱, 甚至是glibc
+- 编译一次，随处拷贝，部署极为方便
+- 对比 gitlab和gogs
+
+.link https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/installation.md
+
+* 丰富的工具
+
+- 一键编译 go build
+  go build code.corp.elong.com/aos/mdb
+
+- 一键测试 go test
+  go test code.corp.elong.com/aos/mdb
+
+- 一键下载更新依赖并编译 go get
+  go get github.com/icexin/markdown
+
+- 自动文档工具 godoc
+
+* Go和Python
+
+Go跟Python相似的地方:
+
+- 语法简单
+- 功能强大
+- 易于学习
+
+不一样的地方:
+
+- 运行速度快
+- 并发支持
+- 静态类型
+
+* Go的应用
+
+* Go在艺龙的使用
+
+- 2013年开始在基础架构部试用
+- 2014年日志客户端使用go重写，收敛linux和windows的agent
+- 2015年监控后端几乎全部使用Go重写，策略模块每秒处理3w+的监控数据
+
+* Go的明星项目
+
+- Docker，正火热的容器化技术
+- kubernetes，Goole Borg的开源实现
+- Etcd, 类似zookeeper的高可用key-value存储
+
+* Go学习资料
+
+- 官方网站
+.link golang.org
+- Go在线教程
+.link tour.golang.org
+- 文档
+.link golang.org/doc/
