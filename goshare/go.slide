@@ -4,6 +4,13 @@ Go语言分享
 fanbingxin.me@gmail.com
 https://github.com/icexin
 
+
+* 自我介绍
+
+- 4年go语言开发经验
+- 一直从事自动化运维&基础架构相关工作
+- 成功在整个部门推行go语言，go语言布道者
+
 * 什么是Go?
 
 Go语言是Google于2009年推出的一门新的系统编程语言。
@@ -31,7 +38,23 @@ Go语言是Google于2009年推出的一门新的系统编程语言。
 - 2007年开始设计
 - 2008年作为Goole的20%项目开始实现
 - 2009年作为开源项目面向大众
-- 前天(8月15日)刚刚发布了1.7版本
+- 最新的是1.8版本
+
+
+* 出身名贵
+
+.image GPT.png
+
+从左到右分别是罗伯特·格瑞史莫、罗伯·派克和肯·汤普逊。
+
+* 势头猛劲
+
+.image tiobe.png _ 900
+
+* 势头猛劲
+
+.image trending.png _ 900
+
 
 * 为什么需要一个新的语言
 
@@ -47,6 +70,13 @@ Go语言是Google于2009年推出的一门新的系统编程语言。
 * 手残的灾难
 
 .code py.py
+
+* 趋势
+
+- 人力成本越来越高
+- 机器越来越便宜
+- 机器的性能越来越厉害
+- 在开发效率和运行速度上达到平衡
 
 * 简化这门语言必是一门更大的成就 - Rob Pike
 
@@ -169,7 +199,7 @@ Go跟Python相似的地方:
 
 * Go的应用
 
-* Go在艺龙的使用
+* Go在公司内部的使用
 
 - 2013年开始在基础架构部试用
 - 2014年日志客户端使用go重写，收敛linux和windows的agent
@@ -180,6 +210,7 @@ Go跟Python相似的地方:
 - Docker，正火热的容器化技术
 - kubernetes，Goole Borg的开源实现
 - Etcd, 类似zookeeper的高可用key-value存储
+- TIDB, 国人开发的Google spanner的开源实现
 
 * Go学习资料
 
@@ -189,3 +220,8 @@ Go跟Python相似的地方:
 .link tour.golang.org
 - 文档
 .link golang.org/doc/
+
+* Q&A
+
+.image reboot.jpg
+
