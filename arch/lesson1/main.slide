@@ -1,0 +1,71 @@
+Go课程
+第一节
+
+饼干
+https://github.com/icexin
+
+* golang简介 
+
+Go语言是Google于2009年推出的一门新的系统编程语言。
+
+特点:
+
+- 静态编译
+- 垃圾回收
+- 简洁的符号和语法
+- 平坦的类型系统
+- 基于CSP的并发模型。
+- 高效简单的工具链。
+- 丰富的标准库
+
+* go语言作者
+
+
+
+.image GPT.png
+
+
+* go语言家谱
+.image go-ancestors.png 500 _
+* go语言的应用
+
+- Docker，正火热的容器化技术
+- kubernetes，Goole Borg的开源实现
+- Etcd, 类似zookeeper的高可用key-value存储
+* 安装
+下载地址(官网):
+.link https://golang.org/dl/ https://golang.org/dl/
+
+下载地址(国内):
+.link https://dl.gocn.io/ https://dl.gocn.io/
+
+* 初始化环境
+
+- GOROOT 放置go的标准库和工具链
+$HOME/local/go (linux, mac) 
+c:\local\go (windows) 
+
+- GOPATH 放置第三方代码和自己的工程
+$HOME/go (linux, mac) 
+c:\go (windows)
+
+- PATH
+export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+
+* Hello World
+
+.play hello.go
+
+
+
+* 编译运行
+
+- go build hello.go && ./hello
+- go run hello.go
+* IDE选择
+- atom 配合go-plus插件(课程选择)
+- sublime 配合gosublime插件
+- LiteIDE 专用IDE，没用过
+- emacs + spacemacs配置(我在使用)
+- Goland JetBrains出品 
+
