@@ -1,0 +1,112 @@
+Go课程
+第二节
+
+饼干
+https://github.com/icexin
+
+* go程序的结构
+.code echo.go
+
+* go通过package组织
+
+- `package` 关键字
+- 放在程序的第一行
+- 两种package，一种是库package，一种是二进制package
+- 二进制package使用 `main` 来表示，库package的名字跟go文件所在的目录名一样
+
+* 二进制package
+
+- 以 `package main` 作为文件的第一行
+- 有且只有一个main函数，如echo.go所表示
+
+* 引入package
+
+- 通过关键字 `import` 来引入其他package
+- 多个package可以用括号包含起来
+- 引入但没有使用的package会引起编译错误
+
+* main函数
+
+- 二进制程序的入口
+- main函数结束了整个程序就结束了
+- 整个main package只能有一个
+
+* 代码风格
+
+- 所有的代码只有一种，gofmt的风格
+- gofmt 不是任何人的风格，但所有人都喜欢 gofmt 的风格
+- 使用 `gofmt -w xx.go`  来格式化代码
+ 
+* 命令行参数
+.code echo.go
+
+* 练习:编写 `cat` 命令
+
+cat辅助函数
+
+.code cat.go /START OMIT/,/END OMIT/
+
+
+* 变量声明
+
+.code var.go
+
+* 零值初始化
+
+- 每个类型都有默认的零值
+.play zero.go
+
+- 初始化为零值，安全！
+
+* 短变量
+
+.code short_var.go
+
+* 指针
+
+- *T 即为类型T的指针
+- &t 即为去变量t的地址
+- *p 即为取指针变量所指向的内容
+
+* flag包的使用
+.code echo2.go
+
+* 练习: 为echo程序添加-n的命令行参数
+.code echo2.go
+
+* 变量的生命周期
+
+- 垃圾回收
+- 栈和堆
+
+* 赋值
+.code assign.go
+
+* 多变量赋值
+- x, y = y, x
+
+.code fib.go
+
+* 类型
+- bool
+- int, uint, int32, int64
+- float32, float64
+- string
+- slice, map, channel
+- complex64
+
+* 包和文件
+- 同一个目录下的多个文件组成一个包
+- 一个包里面的文件需要相同的package name
+
+* 引入包
+- import关键字
+- 包别名
+
+* 作用域
+- 局部变量
+- 全局变量
+
+* gotty讲解
+
+* go写爬虫
