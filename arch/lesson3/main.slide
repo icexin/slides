@@ -1,0 +1,32 @@
+Go课程
+第二节
+
+饼干
+https://github.com/icexin
+
+
+* if语句
+.code if.go
+
+- 没有小括号'('
+- 只能是bool表达式, 数字，字符串之类的不行
+
+
+* 练习:
+
+.code if_exercise1.go
+
+* switch语句
+
+* for循环1
+
+.code for.go /FOR1 OMIT/,/END OMIT/
+
+* for循环2
+
+.code for.go /FOR2 OMIT/,/END OMIT/
+
+* for循环3
+
+.code for.go /FOR3 OMIT/,/END OMIT/
+
