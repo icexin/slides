@@ -5,6 +5,60 @@ Go课程
 https://github.com/icexin
 
 
+* 数据类型
+
+- 整数
+- 字符串
+- 布尔
+- 浮点
+
+* 整数
+
+  int, int32, int64, uint, uint32, uint64
+
+* 练习
+
+说出各个整数类型取值的范围以及字节大小
+
+- 使用unsafe.SizeOf可以获取类型的字节大小
+
+* 字符串
+
+.code str.go
+
+* 字符串操作
+
+.code str_op.go
+
+* 字符串修改
+
+- 本身不可修改
+- 通过跟[]byte相互转换来修改
+
+* 练习
+
+反转字符串
+
+* 布尔
+
+   var b bool
+
+- 取值只有 true 和 false
+
+* 浮点数
+
+ fmt.Println(3/2)输出啥?
+
+* 强类型
+
+- 类型转换需要显式进行
+- 字符串跟数字需要借助函数转换 strconv
+
+* 练习
+
+编写计算器，调用形式如 expr 1 + 2
+
+
 * if语句
 .code if.go
 
@@ -15,8 +69,6 @@ https://github.com/icexin
 * 练习:
 
 .code if_exercise1.go
-
-* switch语句
 
 * for循环1
 
@@ -30,3 +82,14 @@ https://github.com/icexin
 
 .code for.go /FOR3 OMIT/,/END OMIT/
 
+* 练习:
+
+输出 100的斐波那契数之和
+
+
+* 打开关闭文件
+
+.code file.go
+
+
+* 读取文件
