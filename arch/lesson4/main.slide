@@ -1,0 +1,35 @@
+Go课程
+第四节
+
+饼干
+https://github.com/icexin
+
+* 复合数据类型
+- 数组，切片
+- map
+- 结构体
+- 序列化和反序列化
+
+* 数组
+
+.code array.go
+
+* 数组初始化
+
+.code array_init.go
+
+* 数组变量赋值和比较
+
+.code array_assign.go
+
+* 数组的应用:md5
+
+- https://godoc.org/crypto/md5
+
+.code md5.go
+
+* 练习
+
+编写md5sum程序
+
+* 切片
