@@ -33,3 +33,66 @@ https://github.com/icexin
 编写md5sum程序
 
 * 切片
+
+.code slice.go
+
+* 切片原理
+
+.code slice1.go
+
+* 切片字面量
+
+.code slice_iter.go
+
+* 切片方法
+
+.code slice_default.go
+
+* 切片长度和容量
+
+.code slice_len.go
+
+* nil切片
+
+.code slice_nil.go
+
+* make创建slice
+
+.code slice_make.go
+
+* append切片
+
+.code slice_append.go
+
+* range切片
+
+.code slice_range.go
+
+* 练习
+
+- 反转切片的函数
+- 反转切片的两部分
+
+* map
+
+- hash方式的
+- 无序的
+- O(1)的访问时间
+
+* 创建map
+
+.code map.go
+
+* 结构体
+
+* fmt家族
+
+- scanf用于格式化获取数据
+- printf用于格式化打印数据
+- 前缀 F S
+
+* 练习
+
+编写学生管理系统
+
+* 解析JSON
