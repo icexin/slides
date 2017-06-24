@@ -67,10 +67,10 @@ https://github.com/icexin
 * range切片
 
 .code slice_range.go
-
 * 练习
-
 - 反转切片的函数
+
+* 作业1
 - 反转切片的两部分
 
 * map
@@ -83,7 +83,30 @@ https://github.com/icexin
 
 .code map.go
 
+* 获取元素
+.code map_get.go
+
+* 删除元素
+
+- 删除使用delete内置函数
+
+* 遍历
+
+.code map_range.go
+
+- 遍历顺序不确定
+
+* 练习
+
+统计单词出现的个数
+
 * 结构体
+
+.code struct.go
+
+* 结构体指针
+
+.code struct_pointer.go
 
 * fmt家族
 
@@ -95,4 +118,25 @@ https://github.com/icexin
 
 编写学生管理系统
 
-* 解析JSON
+- list指令，列出所有的学生信息
+- add指令，增加一个学生信息
+
+* 序列化与反序列化
+
+
+* 序列化JSON
+
+.code json_encode.go
+
+* 练习
+将Student map的数据写入到文件
+
+* 反序列化
+
+.code json_decode.go
+
+* 练习
+从文件中读取Student map的数据
+
+* 作业2
+- 增加save和load指令
