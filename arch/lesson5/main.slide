@@ -1,10 +1,16 @@
+Go课程
+第五节
+
+饼干
+https://github.com/icexin
+
+
 * 过程式编程
 
 - 函数
 - 错误异常处理
 - Go调用外部程序
-- HTTP简介
-
+- 文件读取的多种方式
 
 * 函数
 
@@ -16,6 +22,20 @@
 
    func f(i int, j int, k int,  s string, t string)
 
+* 多返回值
+.code multi.go
+* 命名返回值
+.code name_multi.go
+* 可变参数
+.code func_var.go
+
+* 递归
+
+.image digui.png 400 _
+* 递归实现斐波那契数列
+
+.code fib.go
+
 * 函数的要素
 
 - 函数名
@@ -23,22 +43,48 @@
 - 返回值
 - 如果两个函数的参数跟返回值是一样的则认为是一个类型的
 
-* 递归
-
-.image digui.png 400 _
-
-* 递归实现斐波那契数列
-
-.code fib.go
-
-
-* 多返回值
-* 匿名函数
-* 练习：排序
 * 函数类型
+.code func_value.go
+
 * 练习: 用函数封装学生管理系统
+* 作业：添加更新和删除指令
+* 匿名函数
+.code toupper.go
+* 闭包
+.code closure.go
+
+* 闭包坑
+.play closure1.go
+
+* 练习：排序
+
 * defer
-* 错误处理
+- 关闭文件
+- 函数返回前执行
+.code defer.go
+ 
+* defer文件关闭
+.code defer_file.go
 * error类型
-* 练习：错误处理
+.code error.go
+* EOF error
+.code eof.go
 * panic和recover
+.code panic.go
+
+* 调用系统命令
+.code cmd_ls.go
+* 交互式调用
+.code cmd_pipe.go
+
+* 标准输入，输出和错误
+
+* 练习：编写shell
+* 管道
+* 练习：bash管道
+* 读取文件几种方式
+- file.Read
+- ioutil.ReadFile
+- bufio.Scanner
+- bufio.Reader
+- io.Copy
