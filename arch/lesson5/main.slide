@@ -1,0 +1,40 @@
+Go课程
+第五节
+
+饼干
+https://github.com/icexin
+
+* 过程式编程
+
+- 函数
+- 错误异常处理
+- Go调用外部程序
+- HTTP简介
+
+
+* 函数
+
+.code func.go
+
+* 参数类型省略
+
+   func f(i, j, k int, s, t string)
+
+   func f(i int, j int, k int,  s string, t string)
+
+* 函数的要素
+
+- 函数名
+- 参数
+- 返回值
+- 如果两个函数的参数跟返回值是一样的则认为是一个类型的
+
+* 递归
+
+.image digui.png 400 _
+
+* 递归实现斐波那契数列
+
+.code fib.go
+
+
