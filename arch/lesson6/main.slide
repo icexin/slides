@@ -5,12 +5,44 @@ Go课程
 https://github.com/icexin
 
 * 总览
+- 对象和方法
+- 接口使用
+- go里面的unix哲学
+
+* 函数回顾
+
 * 对象和方法
+
+.code method.go
+
 * 声明方法
+.code method1.go
+
+* 练习
+
+设定一个路径上的所有点用[]Point表示，求出路径的长度
+
+* type是用来定义类型的
+
+.code type.go
+
+不同的对象可以有相同的方法名
+
+* 练习
+
+定义Path类型，补全Path的Distance方法
+
+* time包的使用
+
 * 指针接收者
-* 结构体内嵌
-* 方法值
+
+- 我们希望改变对象的成员
+- 等价于函数的第一个参数是指针
+ 
+.code pointer_method.go
+
 * 封装
+
 * 可见性
 * 接口
 * 为什么需要接口
