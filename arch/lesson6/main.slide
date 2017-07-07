@@ -21,6 +21,8 @@ https://github.com/icexin
 * http.Handler
 * error接口
 * io.Writer和io.Reader
+* 空接口
+* tar命令
 * 接口断言
 * switch接口判断
 * io包里面的接口处理
