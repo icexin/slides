@@ -44,20 +44,83 @@ https://github.com/icexin
 * 封装
 
 * 可见性
+
+- 通过首字母大小写来控制可见性
+- 可见性是package级别的
+
+* 作业1
+- 用对象的方式封装一个ClassRoom对象
+- 增加一条select指令来选择当前的ClassRoom
+
+
 * 接口
 * 为什么需要接口
 * 声明接口
+.code iowriter.go
+
 * 实现接口
+- 实现了接口里面的所有方法就算实现了接口
+- os.File
+- 接口也是实现者
+
+* io.Writer接口
+.code char_count.go
+
+* 练习:
+实现一个统计行数的writer
+
+* 接口变量
+
+.code ivar.go
+
 * 常见接口
+
 * sort.Interface
+.code sort.go
+
+* 练习
+编写一个按照长度排序的实现 byLength
+
 * http.Handler
+godoc.org/net/http
+
 * error接口
+godoc.org/errrors
+
 * io.Writer和io.Reader
-* 空接口
-* tar命令
-* 接口断言
-* switch接口判断
+unix的文件抽象
+
 * io包里面的接口处理
+godoc.org/io
+
 * tee命令
-* 遍历文件数
-* du命令
+- io.TeeWriter
+ 
+* 接口断言
+.code iassert.go
+
+* switch接口判断
+.code switch.go
+
+* 空接口
+- 空接口可以接受任何类型
+ 
+* 遍历文件树
+- filepath.Walk
+
+.code walk.go
+ 
+* 练习: du命令
+
+* tar命令
+.code tar.go
+ 
+* 练习:
+实现打包功能
+
+* 装饰器对象
+- tar的解压缩和解打包
+
+* 作业2：
+- 实现tar的自定义过滤器
+
