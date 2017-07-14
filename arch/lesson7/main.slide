@@ -1,0 +1,34 @@
+* 总览
+
+- 协程和channel
+- 基于通信的并发
+- 基于锁的并发
+- 并发实战
+
+* 协程(goroutine)
+
+- 类似线程的运行方式
+- 并行处理
+
+* 启动协程
+
+- go关键字加函数
+- 在正常函数调用前面加上go
+
+* 例子
+
+.code sleep.go
+
+* sleep排序(搞笑)
+
+.code sleep_sort.go
+
+* channel
+
+- 协程并不都是不相干的完成事情
+- 需要相互配合
+
+* 创建channel
+.code channel.go
+
+* channel的缓冲大小
