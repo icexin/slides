@@ -1,9 +1,8 @@
 * 总览
 
 - 协程和channel
-- 基于通信的并发
-- 基于锁的并发
-- 并发实战
+- 并发爬虫
+- 多线程下载器
 
 * 协程(goroutine)
 
@@ -32,3 +31,47 @@
 .code channel.go
 
 * channel的缓冲大小
+
+.code channel_buf.go
+
+* channel的range语法
+
+.code range.go
+
+* channel的select语法
+
+.code select.go
+
+* 多线程爬虫
+
+- 抓取网页
+- 获取图片链接
+- 格式化链接
+- 下载图片到本地
+- 打tar包
+- 可选，返回给客户端
+ 
+* HTTP client介绍
+
+* 下载网页和图片
+
+* goquery介绍
+
+- 用于解析html文档
+- 类似javascript里面的Jquery
+
+* 链接的形式
+
+- http://xxx.com/a.jpg
+- //xx.com/a.jpg
+- /static/a.jpg
+- a.jpg
+
+* task pool介绍
+
+* 多线程下载工具
+
+- 获取文件大小
+- 分隔子任务
+- 开启子任务
+- 合并文件

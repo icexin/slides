@@ -5,13 +5,14 @@ import (
 	"time"
 )
 
-func print(s string) {
-	time.Sleep(time.Second)
-	fmt.Println(s)
+func say(s string) {
+	for i := 0; i < 5; i++ {
+		time.Sleep(100 * time.Millisecond)
+		fmt.Println(s)
+	}
 }
 
 func main() {
-	print("hello1")
-	print("hello2")
-	print("hello3")
+	go say("world")
+	say("hello")
 }
