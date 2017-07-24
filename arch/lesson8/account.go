@@ -18,14 +18,14 @@ func (a *Account) GetGongZi(n int) {
 }
 
 func (a *Account) GiveWife(n int) {
-	if a.money > 0 {
+	if a.money > n {
 		a.DoPrepare()
 		a.money -= n
 	}
 }
 
 func (a *Account) Buy(n int) {
-	if a.money > 0 {
+	if a.money > n {
 		a.DoPrepare()
 		a.money -= n
 	}
