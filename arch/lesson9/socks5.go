@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/md5"
@@ -81,61 +82,61 @@ func parseRequest(conn net.Conn) (string, int16, error) {
 	return addr, port, nil
 }
 
-func passwordToKey(password string, keylen int) []byte {
-	// buf := new(bytes.Buffer)
-	// var md5sum []byte
-	// for buf.Len() < keylen {
-	// 	content := string(md5sum) + password
-	// 	md5Array := md5.Sum([]byte(content))
-	// 	md5sum = md5Array[:]
-	// 	buf.Write(md5sum)
-	// }
-
-	// return buf.Bytes()[:keylen]
+func passwordToKey(password string) []byte {
 	md5sum := md5.Sum([]byte(password))
 	return md5sum[:]
 }
 
 type cryptoConn struct {
-	password string
-	conn     net.Conn
-	dec      cipher.Stream
-	enc      cipher.Stream
+	key  []byte
+	iv   []byte
+	conn net.Conn
+	dec  cipher.Stream
+	enc  cipher.Stream
 }
 
 func NewCryptoConn(conn net.Conn, password string) *cryptoConn {
 	return &cryptoConn{
-		conn:     conn,
-		password: password,
+		conn: conn,
+		key:  passwordToKey(password),
 	}
 }
 
-func (c *cryptoConn) initEnc(iv []byte) {
-	key := passwordToKey(c.password, 16)
-	block, err := aes.NewCipher(key)
+func (c *cryptoConn) initEnc() {
+	block, err := aes.NewCipher(c.key)
 	if err != nil {
 		panic(err)
 	}
 
-	c.enc = cipher.NewCFBEncrypter(block, key)
+	if c.iv == nil {
+		c.iv = make([]byte, 16)
+		io.ReadFull(rand.Reader, c.iv)
+	}
+	c.conn.Write(c.iv)
+	c.enc = cipher.NewCFBEncrypter(block, c.iv)
 }
 
-func (c *cryptoConn) initDec(iv []byte) {
-	key := passwordToKey(c.password, 16)
-	block, err := aes.NewCipher(key)
+func (c *cryptoConn) initDec() {
+	block, err := aes.NewCipher(c.key)
 	if err != nil {
 		panic(err)
 	}
 
-	c.dec = cipher.NewCFBDecrypter(block, key)
+	iv := make([]byte, 16)
+	io.ReadFull(c.conn, iv)
+	if c.iv == nil {
+		c.iv = iv
+	}
+	if !bytes.Equal(iv, c.iv) {
+		panic("")
+	}
+
+	c.dec = cipher.NewCFBDecrypter(block, c.iv)
 }
 
 func (c *cryptoConn) Write(b []byte) (int, error) {
 	if c.enc == nil {
-		iv := make([]byte, 16)
-		io.ReadFull(rand.Reader, iv)
-		c.conn.Write(iv)
-		c.initEnc(iv)
+		c.initEnc()
 	}
 	buf := make([]byte, len(b))
 	c.enc.XORKeyStream(buf, b)
@@ -144,12 +145,7 @@ func (c *cryptoConn) Write(b []byte) (int, error) {
 
 func (c *cryptoConn) Read(b []byte) (int, error) {
 	if c.dec == nil {
-		iv := make([]byte, 16)
-		_, err := io.ReadFull(c.conn, iv)
-		if err != nil {
-			return 0, err
-		}
-		c.initDec(iv)
+		c.initDec()
 	}
 	n, err := c.conn.Read(b)
 	c.dec.XORKeyStream(b[:n], b[:n])
@@ -171,23 +167,22 @@ func handleConn(conn net.Conn) {
 	}
 
 	log.Print(addr)
-	remote, err := net.Dial("tcp", "a.icexin.com:8001")
+	remote, err := net.Dial("tcp", "")
 	if err != nil {
 		log.Print(err)
 		return
 	}
 	defer remote.Close()
 
-	rrlocal := NewCryptoConn(conn, "fanbingxin8001")
-	rremote := NewCryptoConn(remote, "fanbingxin8001")
+	rremote := NewCryptoConn(remote, "")
 
 	addrreq := []byte{3, byte(len(addr))}
 	addrreq = append(addrreq, []byte(addr)...)
 	rremote.Write(addrreq)
 	binary.Write(rremote, binary.BigEndian, port)
 
-	go io.Copy(rremote, rrlocal)
-	io.Copy(rrlocal, rremote)
+	go io.Copy(rremote, conn)
+	io.Copy(conn, rremote)
 }
 
 func main() {

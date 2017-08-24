@@ -1,0 +1,34 @@
+Go课程
+第十一节
+
+饼干
+https://github.com/icexin
+
+* 总览
+
+- 其他加密方式
+- 中间件回顾
+- 加密代理
+- 监控大作业介绍及演示
+- 大作业环境准备及调试
+
+* 其他加密方式
+
+- aes-128
+
+* 中间件回顾
+- 传入一个io.Reader返回一个io.Reader
+
+* 加密代理
+- 配合中间件实现两端加密
+
+* 监控大作业介绍及演示
+
+- agent 采集数据
+- transfer 收集agent数据，放入kafka，同时也是push网关
+- saver 从kafka读取数据放入到es
+- judge 从kafka读取数据，根据配置的报警规则，判断是否报警，报警数据放入到kafka
+- alarm 从kafka读取数据，发送邮件
+- kafka 数据传输队列
+- elasticsearch 数据存储
+- grafana 图表展示

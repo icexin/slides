@@ -1,0 +1,49 @@
+Go课程
+第十二节
+
+饼干
+https://github.com/icexin
+
+* 总览
+
+- 串联socks5和proxy_b
+- 架构讲解
+- agent结构讲解
+- psutil介绍
+- 数据格式与通信协议
+- 编写agent
+
+* 串联socks5和proxy
+
+- 关键点：中间件
+
+* 架构讲解
+
+* agent结构
+
+- metric采集器
+- scheduler调度器
+- sender网络发送
+
+* psutil介绍
+
+https://github.com/shirou/gopsutil
+
+- cpu
+- memory
+- 网络
+- 磁盘
+- 等等
+
+* 实战
+- 获取 cpu使用率，cpu load, 内存使用率，磁盘使用率
+
+* 数据格式
+
+.code metric.go
+
+
+* 通信协议
+
+- '\n'结尾的json数据
+- 没有ack

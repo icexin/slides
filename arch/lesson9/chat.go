@@ -10,6 +10,7 @@ import (
 	"net"
 	"strings"
 	"sync"
+	"time"
 )
 
 var (
@@ -81,7 +82,8 @@ func NewRoom() *Room {
 }
 
 func (r *Room) BroadCast(who string, s string) {
-	msg := fmt.Sprintf("%s: %s\n", who, s)
+	timestr := time.Now().Format("20060102 15:04:05")
+	msg := fmt.Sprintf("%s %s: %s\n", timestr, who, s)
 	r.lock.Lock()
 	defer r.lock.Unlock()
 	for _, u := range r.users {
