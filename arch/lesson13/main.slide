@@ -6,6 +6,7 @@ https://github.com/icexin
 
 * 总览
 
+- 用户自定义监控项
 - grafana介绍: 通用图表展示
 - kafka介绍：分布式队列
 - go写kafka
@@ -42,6 +43,22 @@ https://github.com/icexin
 * 日志消费
 
 .image log_consumer.png _ 600
+
+* 数据保留
+
+- 即使消费数据也不会删除
+- 数据有单独的删除策略
+- 客户端只是记录一个offset
+
+* 分布式
+
+- 多副本容灾
+- leader和follower
+
+* consumer group
+
+.image consumer-groups.png _ 600
+
 
 * 搭建
 
