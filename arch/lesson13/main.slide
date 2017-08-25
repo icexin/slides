@@ -1,0 +1,49 @@
+Go课程
+第十三节
+
+饼干
+https://github.com/icexin
+
+* 总览
+
+- grafana介绍: 通用图表展示
+- kafka介绍：分布式队列
+- go写kafka
+- go订阅kafka
+- es介绍: 存储和查询
+- kibana介绍: es的查询界面
+- go写入es
+
+* grafana介绍
+
+* 搭建
+
+* 数据源
+
+- grafana的数据来源
+- grafana只是作为一个数据展示工具，本身不存储数据
+
+* grafana的dashboard
+
+- 调节数据的展示
+
+* kafka介绍：分布式队列
+
+.image kafka_intro.png _ 600
+
+* 拓扑结构
+
+.image tp.png _ 600
+
+* topic和日志
+
+.image topic_log.png _ 600
+
+* 日志消费
+
+.image log_consumer.png _ 600
+
+* 搭建
+
+- 启动zookeeper
+- 启动kafka
