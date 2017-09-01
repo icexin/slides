@@ -1,15 +1,29 @@
 package main
 
 import (
-	"database/sql"
+	"crypto/md5"
 	"fmt"
 	"html/template"
 	"log"
 	"net/http"
 	"path/filepath"
+	"strconv"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/jmoiron/sqlx"
 )
+
+var (
+	db *sqlx.DB
+)
+
+type User struct {
+	Id       int
+	Name     string
+	Password string
+	Note     string
+	Isadmin  bool
+}
 
 func render(w http.ResponseWriter, name string, data interface{}) {
 	tplfile := filepath.Join("template", name+".tpl")
@@ -25,41 +39,120 @@ func render(w http.ResponseWriter, name string, data interface{}) {
 	}
 }
 
-func Index(w http.ResponseWriter, r *http.Request) {
+func Login(w http.ResponseWriter, r *http.Request) {
 	render(w, "login", nil)
 }
 
-func Login(w http.ResponseWriter, r *http.Request) {
+func CheckLogin(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
-	// fmt.Fprintf(w, "%s:%s", r.FormValue("user"), r.FormValue("password"))
+	user := r.FormValue("user")
+	password := r.FormValue("password")
+
+	var s string
+	err := db.Get(&s, "SELECT password FROM user where name = ?", user)
+	if err != nil {
+		log.Print(err)
+		http.Error(w, "bad user/password", 400)
+		return
+	}
+
+	md5sum := md5.Sum([]byte(password))
+	if s != fmt.Sprintf("%x", md5sum) {
+		http.Error(w, "bad user/password", 400)
+		return
+	}
+
+	cookie := http.Cookie{
+		Name:   "user",
+		Value:  user,
+		Path:   "/",
+		MaxAge: 600,
+	}
+
+	http.SetCookie(w, &cookie)
 	http.Redirect(w, r, "/list", 302)
 }
 
 func List(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "list")
+	var users []User
+	err := db.Select(&users, "SELECT * FROM user")
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	render(w, "list", users)
 }
 
 func Add(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	name := r.FormValue("name")
+	passwd := fmt.Sprintf("%x", md5.Sum([]byte(r.FormValue("password"))))
+	note := r.FormValue("note")
+	_, err := db.Exec("INSERT INTO user VALUES(NULL,?,?,?,?)", name, passwd, note, 0)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+	}
 }
 
 func Update(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	id := r.FormValue("id")
+	passwd := fmt.Sprintf("%x", md5.Sum([]byte(r.FormValue("password"))))
+	note := r.FormValue("note")
+	_, err := db.Exec("UPDATE user SET password = ?, note=? WHERE id=?", passwd, note, id)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+	}
+}
+
+func Delete(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	idstr := r.FormValue("id")
+	if idstr == "" {
+		http.Error(w, "empty id", 400)
+		return
+	}
+	id, err := strconv.Atoi(idstr)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+	log.Printf("id:%v", id)
+	_, err = db.Exec("DELETE FROM user WHERE id = ?", id)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+}
+
+func NeedLogin(h http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		_, err := r.Cookie("user")
+		if err == nil {
+			h(w, r)
+			return
+		}
+
+		log.Print(err)
+		http.Redirect(w, r, "/login", 302)
+	}
 }
 
 func main() {
-	http.HandleFunc("/", Index)
+	http.Handle("/favicon.ico", http.NotFoundHandler())
+	http.HandleFunc("/", NeedLogin(List))
 	http.HandleFunc("/login", Login)
-	http.HandleFunc("/list", List)
-	db, err := sql.Open("mysql", "golang:golang@tcp(reboot:3306)/go")
+	http.HandleFunc("/checkLogin", CheckLogin)
+	http.HandleFunc("/list", NeedLogin(List))
+	http.HandleFunc("/add", NeedLogin(Add))
+	http.HandleFunc("/update", NeedLogin(Update))
+	http.HandleFunc("/delete", NeedLogin(Delete))
+
+	var err error
+	db, err = sqlx.Open("mysql", "golang:golang@tcp(59.110.12.72:3306)/go")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	var user string
-	row := db.QueryRow("SELECT CURRENT_USER()")
-	err = row.Scan(&user)
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Print("user:", user)
-	//log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
