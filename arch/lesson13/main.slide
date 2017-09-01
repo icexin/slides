@@ -64,3 +64,21 @@ https://github.com/icexin
 
 - 启动zookeeper
 - 启动kafka
+
+* elasticsearch: 分布式搜索引擎
+
+- 基于lucene全文搜索库
+- 强大的搜索语法
+- 良好设计的存储架构
+
+* 概念
+- 文档
+- 索引
+- query
+- 模板
+- 倒排索引
+
+* 时间序列数据库
+
+- 按日期分隔
+- 定期清理策略
