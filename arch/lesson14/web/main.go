@@ -4,8 +4,10 @@ import (
 	"crypto/md5"
 	"fmt"
 	"html/template"
+	"io"
 	"log"
 	"net/http"
+	"os"
 	"path/filepath"
 	"strconv"
 
@@ -125,6 +127,22 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func UploadPage(w http.ResponseWriter, r *http.Request) {
+	render(w, "upload", nil)
+}
+
+func Upload(w http.ResponseWriter, r *http.Request) {
+	r.ParseMultipartForm(32 << 20)
+	file, handler, err := r.FormFile("uploadFile")
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	f, _ := os.Create(filepath.Base(handler.Filename))
+	defer f.Close()
+	io.Copy(f, file)
+}
+
 func NeedLogin(h http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		_, err := r.Cookie("user")
@@ -147,6 +165,8 @@ func main() {
 	http.HandleFunc("/add", NeedLogin(Add))
 	http.HandleFunc("/update", NeedLogin(Update))
 	http.HandleFunc("/delete", NeedLogin(Delete))
+	http.HandleFunc("/uploadPage", UploadPage)
+	http.HandleFunc("/upload", Upload)
 
 	var err error
 	db, err = sqlx.Open("mysql", "golang:golang@tcp(59.110.12.72:3306)/go")
